@@ -1,0 +1,16 @@
+.popup__bio {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  margin: 0 auto;
+  height: 27px;
+  width: 100%;
+  margin-top: 30px;
+  padding: 0;
+  color: #000;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

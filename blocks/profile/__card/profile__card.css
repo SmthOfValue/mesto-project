@@ -1,0 +1,13 @@
+.profile__card {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 30px
+}
+
+@media screen and (max-width: 950px) {
+  .profile__card {
+    grid-template-columns: 1fr;
+    grid-template-rows: 120px 1fr;
+    margin: 0 auto;
+  }
+}

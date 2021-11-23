@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Место</title>
+</head>
+<body class="page">
+  <header class="header">
+    <img src="./images/logo_dark.svg" alt="Логотип Место Россия" class="header__logo">
+  </header>
+  <main>
+    <section class="popup popup_opened">
+      <div class="popup__container">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="popup__form">
+          <input type="text" class="popup__name" id="popup__name" name="profile-name" value="Жак-Ив Кусто">
+          <input type="text" class="popup__bio" id="popup__bio" name="profile-bio" value="Исследователь океана">
+          <button class="popup__save" type="submit">Сохранить</button>
+        </form>
+        <button class="popup__close" type="button"></button>
+      </div>
+    </section>
+    <section class="profile">
+      <div class="profile__card">
+        <img src="./images/cousteau.jpg" alt="Фотография Кусто" class="profile__avatar">
+        <div class="profile__info">
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <button class="profile__edit" type="button"></button>
+          <p class="profile__bio">Исследователь океана</p>
+        </div>
+      </div>
+      <button class="profile__add" type="button"></button>
+    </section>
+    <section class="elements">
+      <div class="element">
+        <img src="./images/karachaevsk.jpg" alt="Развалины старого каменного здания" class="element__image">
+        <form class="element__info">
+          <p class="element__name">Карачаевск</p>
+          <button class="element__like" type="button" id="like"></button>
+        </form>
+      </div>
+      <div class="element">
+        <img src="./images/elbrus.jpg" alt="Поле в тумане на фоне горы" class="element__image">
+        <form class="element__info">
+          <p class="element__name">Гора Эльбрус</p>
+          <button class="element__like element__like_active" type="button" id="like"></button>
+        </form>
+      </div>
+      <div class="element">
+        <img src="./images/dombai.jpg" alt="Смешанный лес в горах" class="element__image">
+        <form class="element__info">
+          <p class="element__name">Домбай</p>
+          <button class="element__like element__like_active" type="button" id="like"></button>
+        </form>
+      </div>
+      <div class="element">
+        <img src="./images/kamchatka.jpg" alt="Равнина на фоне заснеженной горы" class="element__image">
+        <form class="element__info">
+          <p class="element__name">Камчатка</p>
+          <button class="element__like element__like_active" type="button" id="like"></button>
+        </form>
+      </div>
+      <div class="element">
+        <img src="./images/ruskeala.jpg" alt="Озеро с высоким берегом, покрытым лесом" class="element__image">
+        <form class="element__info">
+          <p class="element__name">Рускеала</p>
+          <button class="element__like element__like_active" type="button" id="like"></button>
+        </form>
+      </div>
+      <div class="element">
+        <img src="./images/tulinovka.jpg" alt="Туманный хвойный лес" class="element__image">
+        <form class="element__info">
+          <p class="element__name">Тулиновка</p>
+          <button class="element__like element__like_active" type="button" id="like"></button>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+   <p class="footer__signature">&copy; 2020 Mesto Russia</p>
+  </footer>
+</body>
+</html>
