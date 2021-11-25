@@ -9,8 +9,9 @@
 @import url("./../blocks/popup/__container/popup__container.css");
 @import url("./../blocks/popup/__title/popup__title.css");
 @import url("./../blocks/popup/__form/popup__form.css");
-@import url("./../blocks/popup/__name/popup__name.css");
-@import url("./../blocks/popup/__bio/popup__bio.css");
+@import url("./../blocks/popup/__input-text/popup__input-text.css");
+@import url("./../blocks/popup/__input-text/_field/popup__input-text_field_bio.css");
+@import url("./../blocks/popup/__input-text/_field/popup__input-text_field_name.css");
 @import url("./../blocks/popup/__close/popup__close.css");
 @import url("./../blocks/popup/__save/popup__save.css");
 

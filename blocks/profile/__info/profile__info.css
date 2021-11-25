@@ -1,8 +1,7 @@
 .profile__info {
   display: grid;
-  grid-template-columns: 1fr 24px;
-  grid-template-rows: auto auto;
-  gap: 16px 18px;
+  grid-template-rows: 1fr min-content;
+  gap: 16px;
   align-items: baseline;
   align-self: center;
 }
@@ -10,7 +9,6 @@
 
 @media screen and (max-width: 950px) {
   .profile__info {
-    gap: 14px 10px;
-    grid-template-columns: calc(100% - 10px) 18px;
+    gap: 8px;
   }
 }

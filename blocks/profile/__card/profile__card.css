@@ -9,5 +9,6 @@
     grid-template-columns: 1fr;
     grid-template-rows: 120px 1fr;
     margin: 0 auto;
+    gap: 26px;
   }
 }

@@ -1,4 +1,4 @@
-.popup__name {
+.popup__input-text {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
   font-size: 14px;
@@ -12,4 +12,10 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  box-sizing: border-box;
+  margin-top: 30px;
+}
+
+.popup__input-text:nth-of-type(1) {
+  margin: 0;
 }
