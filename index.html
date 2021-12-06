@@ -16,9 +16,9 @@
       <div class="profile__card">
         <img src="./images/cousteau.jpg" alt="Фотография Кусто" class="profile__avatar">
         <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <h1 class="profile__name">123Жак-Ив Кусто</h1>
           <button class="profile__edit" type="button" aria-label="Редактировать профиль"></button>
-          <p class="profile__bio">Исследователь океана</p>
+          <p class="profile__bio">123Исследователь океана</p>
         </div>
       </div>
       <button class="profile__add" type="button" aria-label="Добавить фотографию"></button>
@@ -74,13 +74,19 @@
   <div class="popup">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form" name="profile-edit-form">
-        <input type="text" class="popup__input-text popup__input-text_field_name" id="profile-name" name="profile-name" value="Жак-Ив Кусто">
-        <input type="text" class="popup__input-text popup__input-text_field_bio" id="profile-bio" name="profile-bio" value="Исследователь океана">
+      <form class="popup__form" name="profile-edit-form" id='profile-edit-form'>
+        <input type="text" class="popup__input-text popup__input-text_field_name" id="profile-name-input" name="profile-name-input" value="Жак-Ив Кусто">
+        <input type="text" class="popup__input-text popup__input-text_field_bio" id="profile-bio-input" name="profile-bio-input" value="Исследователь океана">
         <button class="popup__save" type="submit">Сохранить</button>
       </form>
       <button class="popup__close" type="button" aria-label="Закрыть форму"></button>
     </div>
   </div>
+  <script src="index.js"></script>
+  <script src="/blocks/profile/__edit/profile__edit.js"></script>
+  <script src="/blocks/popup/__close/popup__close.js"></script>
+  <script src="/blocks/popup/__form/popup__form.js"></script>
+  <script src="/blocks/popup/popup.js"></script>
+
 </body>
 </html>
