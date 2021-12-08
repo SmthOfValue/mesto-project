@@ -1,13 +1,15 @@
-let closeButton=document.querySelector('.popup__close');
+const popups = document.querySelectorAll('.popup');
 
-function popupClose(){
-  const popup = document.querySelector('.popup');
+
+function popupClose(evt){
+  const popup = evt.target.closest('.popup');
   popup.classList.remove('popup_opened');
   popup.style.opacity = 0.3;
 
 }
 
-closeButton.addEventListener('click', popupClose);
-
-
+for (let i = 0; i<popups.length; i++){
+  let closeButton = popups[i].querySelector('.popup__close');
+  closeButton.addEventListener('click', popupClose);
+}
 

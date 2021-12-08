@@ -1,13 +1,30 @@
-const formElement = document.querySelector('#profile-edit-form');
+const profileEditForm = document.querySelector('#profile-edit-form');
 
-const nameInput = document.querySelector('#profile-name-input');
-const bioInput = document.querySelector('#profile-bio-input');
+const profileNameInput = profileEditForm.querySelector('#profile-name-input');
+const profileBioInput = profileEditForm.querySelector('#profile-bio-input');
 
-function formSubmitHandler(evt) {
+function profileSubmitHandler(evt) {
   evt.preventDefault();
-  document.querySelector('.profile__name').textContent = nameInput.value;
-  document.querySelector('.profile__bio').textContent = bioInput.value;
-  popupClose();
+  document.querySelector('.profile__name').textContent = profileNameInput.value;
+  document.querySelector('.profile__bio').textContent = profileBioInput.value;
+  popupClose(evt);
 }
 
-formElement.addEventListener('submit', formSubmitHandler);
+profileEditForm.addEventListener('submit', profileSubmitHandler);
+
+const cardAddForm = document.querySelector('#card-add-popup');
+
+const cardPlaceInput = cardAddForm.querySelector('#card-place-input');
+const cardUrlInput = cardAddForm.querySelector('#card-url-input');
+
+function cardSubmitHandler(evt) {
+  evt.preventDefault();
+  const cardObject = {
+    'cardName': cardPlaceInput.value,
+    'cardSource': cardUrlInput.value
+}
+  addCard(cardObject);
+  popupClose(evt);
+}
+
+cardAddForm.addEventListener('submit', cardSubmitHandler);

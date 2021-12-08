@@ -71,7 +71,7 @@
   <footer class="footer">
    <p class="footer__signature">&copy; 2020 Mesto Russia</p>
   </footer>
-  <div class="popup">
+  <div class="popup" id="profile-edit-popup">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form" name="profile-edit-form" id='profile-edit-form'>
@@ -82,8 +82,29 @@
       <button class="popup__close" type="button" aria-label="Закрыть форму"></button>
     </div>
   </div>
+  <div class="popup" id="card-add-popup">
+    <div class="popup__container">
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__form" name="card-add-form" id='card-add-form'>
+        <input type="text" class="popup__input-text popup__input-text_field_place" id="card-place-input" name="card-place-input" placeholder="Название">
+        <input type="text" class="popup__input-text popup__input-text_field_url" id="card-url-input" name="card-url-input" placeholder="Ссылка на картинку">
+        <button class="popup__save" type="submit">Создать</button>
+      </form>
+      <button class="popup__close" type="button" aria-label="Закрыть форму" id="2"></button>
+    </div>
+  </div>
+  <template class="element-template">
+    <article class="element">
+      <img src="" alt="" class="element__image">
+      <div class="element__info">
+        <h2 class="element__name"></h2>
+        <button class="element__like element__like_active" type="button"></button>
+      </div>
+    </article>
+  </template>
   <script src="index.js"></script>
   <script src="/blocks/profile/__edit/profile__edit.js"></script>
+  <script src="./blocks/profile/__add/profile_add.js"></script>
   <script src="/blocks/popup/__close/popup__close.js"></script>
   <script src="/blocks/popup/__form/popup__form.js"></script>
   <script src="/blocks/popup/popup.js"></script>
