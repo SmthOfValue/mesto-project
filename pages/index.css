@@ -36,6 +36,7 @@
 @import url("./../blocks/element/__name/element__name.css");
 @import url("./../blocks/element/__like/element__like.css");
 @import url("./../blocks/element/__like/_active/element__like_active.css");
+@import url("./../blocks/element/__delete/element__delete.css");
 
 @import url("./../blocks/footer/footer.css");
 @import url("./../blocks/footer/__signature/footer__signature.css");

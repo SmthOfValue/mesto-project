@@ -24,5 +24,7 @@ return newCard;
 function addCard(cardObject) {
   const cardsContainer = document.querySelector('.elements');
   cardsContainer.append(createCard(cardObject));
+  updateLikeButtons();
+  updateDeleteButtons();
 }
 

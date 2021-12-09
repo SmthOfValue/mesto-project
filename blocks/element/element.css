@@ -4,5 +4,6 @@
   width: 282px;
   overflow: auto;
   justify-self: center;
+  position: relative;
 }
 
