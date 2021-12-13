@@ -11,5 +11,6 @@
   .elements {
     padding-top: 36px;
     width: 88.125%;
+    gap: 20px;
   }
 }
