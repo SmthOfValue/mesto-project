@@ -40,3 +40,7 @@
 
 @import url("./../blocks/footer/footer.css");
 @import url("./../blocks/footer/__signature/footer__signature.css");
+
+@import url("./../blocks/popup/__image-container/popup__image-container.css");
+@import url("./../blocks/popup/__image/popup__image.css");
+@import url("./../blocks/popup/__caption/popup__caption.css");

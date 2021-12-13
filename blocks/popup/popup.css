@@ -7,8 +7,9 @@
   left: 0;
   height: 100%;
   width: 100%;
-  opacity: 0.3;
+  opacity: 1;
   transition: opacity 0.4s, visibility 0.4s;
+  z-index: 3;
 
 }
 

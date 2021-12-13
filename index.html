@@ -16,57 +16,15 @@
       <div class="profile__card">
         <img src="./images/cousteau.jpg" alt="Фотография Кусто" class="profile__avatar">
         <div class="profile__info">
-          <h1 class="profile__name">123Жак-Ив Кусто</h1>
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__edit" type="button" aria-label="Редактировать профиль"></button>
-          <p class="profile__bio">123Исследователь океана</p>
+          <p class="profile__bio">Исследователь океана</p>
         </div>
       </div>
       <button class="profile__add" type="button" aria-label="Добавить фотографию"></button>
     </section>
     <section class="elements">
-      <article class="element">
-        <img src="./images/karachaevsk.jpg" alt="Развалины старого каменного здания" class="element__image">
-        <div class="element__info">
-          <h2 class="element__name">Карачаевск</h2>
-          <button class="element__like" type="button"></button>
-        </div>
-        <button class="element__delete" type="button"></button>
-      </article>
-      <article class="element">
-        <img src="./images/elbrus.jpg" alt="Поле в тумане на фоне горы" class="element__image">
-        <div class="element__info">
-          <h2 class="element__name">Гора Эльбрус</h2>
-          <button class="element__like element__like_active" type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img src="./images/dombai.jpg" alt="Смешанный лес в горах" class="element__image">
-        <div class="element__info">
-          <h2 class="element__name">Домбай</h2>
-          <button class="element__like element__like_active" type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img src="./images/kamchatka.jpg" alt="Равнина на фоне заснеженной горы" class="element__image">
-        <div class="element__info">
-          <h2 class="element__name">Камчатка</h2>
-          <button class="element__like element__like_active" type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img src="./images/ruskeala.jpg" alt="Озеро с высоким берегом, покрытым лесом" class="element__image">
-        <div class="element__info">
-          <h2 class="element__name">Рускеала</h2>
-          <button class="element__like element__like_active" type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img src="./images/tulinovka.jpg" alt="Туманный хвойный лес" class="element__image">
-        <div class="element__info">
-          <h2 class="element__name">Тулиновка</h2>
-          <button class="element__like element__like_active" type="button"></button>
-        </div>
-      </article>
+
     </section>
   </main>
   <footer class="footer">
@@ -91,8 +49,16 @@
         <input type="text" class="popup__input-text popup__input-text_field_url" id="card-url-input" name="card-url-input" placeholder="Ссылка на картинку">
         <button class="popup__save" type="submit">Создать</button>
       </form>
-      <button class="popup__close" type="button" aria-label="Закрыть форму" id="2"></button>
+      <button class="popup__close" type="button" aria-label="Закрыть форму"></button>
     </div>
+  </div>
+  <div class="popup" id="image-popup">
+    <figure class ="popup__image-container">
+      <img src="" alt="" class="popup__image">
+      <figcaption class="popup__caption"></figcaption>
+      <button class="popup__close" type="button" aria-label="Закрыть фотографию"></button>
+    </figure>
+
   </div>
   <template class="element-template">
     <article class="element">
@@ -105,11 +71,5 @@
     </article>
   </template>
   <script src="./pages/index.js"></script>
-  <script src="./blocks/profile/__edit/profile__edit.js"></script>
-  <script src="./blocks/profile/__add/profile_add.js"></script>
-  <script src="./blocks/popup/__close/popup__close.js"></script>
-  <script src="./blocks/popup/__form/popup__form.js"></script>
-  <script src="./blocks/popup/popup.js"></script>
-
 </body>
 </html>
