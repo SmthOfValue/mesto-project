@@ -9,6 +9,38 @@ function addFlex(){
 }
 window.addEventListener('load', addFlex);
 
+//функция добавления непрозрачности для popup
+function popupAddOpacity(popup){
+  popup.style.opacity = 1;
+}
+//функция открытия попапа в зависимости от нажатой кнопки
+function popupOpen(evt) {
+  if (evt.target.classList.contains('profile__edit')) {
+    const nameInput=document.querySelector('#profile-name-input');
+    const bioInput=document.querySelector('#profile-bio-input');
+    const popup = document.querySelector('#profile-edit-popup');
+
+    nameInput.value=document.querySelector('.profile__name').textContent;
+    bioInput.value=document.querySelector('.profile__bio').textContent;
+
+    popup.classList.add('popup_opened');
+    popupAddOpacity(popup);
+  }
+  if (evt.target.classList.contains('profile__add')) {
+    const popup = document.querySelector('#card-add-popup');
+    popup.classList.add('popup_opened');
+    popupAddOpacity(popup);
+  }
+  if (evt.target.classList.contains('element__image')) {
+    const popup = document.querySelector('#image-popup');
+    popup.querySelector('.popup__image').src = evt.target.src;
+    popup.querySelector('.popup__caption').textContent = evt.target.alt;
+    popup.classList.add('popup_opened');
+    popupAddOpacity(popup);
+    popup.style.background = "rgba(0, 0, 0, 0.9)";
+  }
+}
+
 //добавление обработчиков на открытие попапа с картинкой
 let elementImages = document.querySelectorAll('.element__image');
 
@@ -18,8 +50,6 @@ function updateElementViews(){
     elementImages[i].addEventListener('click', popupOpen);
   }
 }
-
-updateElementViews();
 
 //обработчик кнопок закрытия форм и добавление обработчика на все кнопки закрытия форм
 const popups = document.querySelectorAll('.popup');
@@ -38,7 +68,6 @@ for (let i = 0; i<popups.length; i++){
 }
 
 
-
 //обработчик кнопки like
 let likeButtons = document.querySelectorAll('.element__like');
 
@@ -53,7 +82,6 @@ function updateLikeButtons() {
   }
 }
 
-updateLikeButtons();
 
 //Добавление обработчиков на кнопки удаления элементов
 
@@ -70,7 +98,27 @@ function updateDeleteButtons() {
   }
 }
 
-updateDeleteButtons();
+
+//функция создания элемента из template
+function createCard(cardObject) {
+  const cardTemplate = document.querySelector('.element-template').content;
+  const newCard = cardTemplate.querySelector('.element').cloneNode(true);
+
+  newCard.querySelector('.element__name').textContent = cardObject.cardName;
+  newCard.querySelector('.element__image').alt = cardObject.cardName;
+  newCard.querySelector('.element__image').src = cardObject.cardSource;
+
+  return newCard;
+}
+
+  //функция добавления созданного элемента в разметку
+function addCard(cardObject) {
+  const cardsContainer = document.querySelector('.elements');
+  cardsContainer.prepend(createCard(cardObject));
+  updateLikeButtons();
+  updateDeleteButtons();
+  updateElementViews();
+}
 
 
 //обработчик отправки формы редактирования профиля
@@ -100,7 +148,7 @@ function cardSubmitHandler(evt) {
   const cardObject = {
     'cardName': cardPlaceInput.value,
     'cardSource': cardUrlInput.value
-}
+  }
   addCard(cardObject);
   cardPlaceInput.value = '';
   cardUrlInput.value = '';
@@ -143,40 +191,6 @@ initialCards.forEach(function (item) {
 });
 
 
-
-
-
-//функция открытия попапа в зависимости от нажатой кнопки
-function popupOpen(evt) {
-  if (evt.target.classList.contains('profile__edit')) {
-    const nameInput=document.querySelector('#profile-name-input');
-    const bioInput=document.querySelector('#profile-bio-input');
-    const popup = document.querySelector('#profile-edit-popup');
-
-    nameInput.value=document.querySelector('.profile__name').textContent;
-    bioInput.value=document.querySelector('.profile__bio').textContent;
-
-    popup.classList.add('popup_opened');
-    popup.style.opacity = 1;
-  }
-  if (evt.target.classList.contains('profile__add')) {
-    const popup = document.querySelector('#card-add-popup');
-    popup.classList.add('popup_opened');
-    popup.style.opacity = 1;
-  }
-  if (evt.target.classList.contains('element__image')) {
-    const popup = document.querySelector('#image-popup');
-    popup.querySelector('.popup__image').src = evt.target.src;
-    popup.querySelector('.popup__caption').textContent = evt.target.alt;
-    popup.classList.add('popup_opened');
-    popup.style.opacity = 1;
-    popup.style.background = "rgba(0, 0, 0, 0.9)";
-
-
-  }
-
-}
-
 //добавление обработчиков на кнопки открытия форм
 const addButton=document.querySelector('.profile__add');
 addButton.addEventListener('click', popupOpen);
@@ -186,23 +200,3 @@ editButton.addEventListener('click', popupOpen);
 
 
 
-//функция создания элемента из template
-function createCard(cardObject) {
-  const cardTemplate = document.querySelector('.element-template').content;
-  const newCard = cardTemplate.querySelector('.element').cloneNode(true);
-
-  newCard.querySelector('.element__name').textContent = cardObject.cardName;
-  newCard.querySelector('.element__image').alt = cardObject.cardName;
-  newCard.querySelector('.element__image').src = cardObject.cardSource;
-
-  return newCard;
-}
-
-  //функция добавления созданного элемента в разметку
-function addCard(cardObject) {
-  const cardsContainer = document.querySelector('.elements');
-  cardsContainer.prepend(createCard(cardObject));
-  updateLikeButtons();
-  updateDeleteButtons();
-  updateElementViews();
-}
