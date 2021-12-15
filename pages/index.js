@@ -57,7 +57,7 @@ updateLikeButtons();
 
 //Добавление обработчиков на кнопки удаления элементов
 
-let deleteButtons = document.querySelector('.element__delete');
+let deleteButtons = document.querySelectorAll('.element__delete');
 
 function deleteHandler(evt) {
   evt.target.closest('.element').remove();
