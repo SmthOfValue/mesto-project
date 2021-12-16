@@ -77,11 +77,10 @@ function handleClosePopupButton(evt){
   setClosedPopupOpacity(popup);
 }
 
-for (let i = 0; i<popups.length; i++){
-  let closeButton = popups[i].querySelector('.popup__close');
+popups.forEach(popup=>{
+  const closeButton = popup.querySelector('.popup__close');
   closeButton.addEventListener('click', handleClosePopupButton);
-}
-
+})
 
 //обработчик кнопки like
 function likeCard(evt) {
