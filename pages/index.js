@@ -10,33 +10,66 @@ function addFlex(){
 window.addEventListener('load', addFlex);
 
 //добавление обработчиков на открытие попапа с картинкой
-let elementImages = document.querySelectorAll('.element__image');
+/*let elementImages = document.querySelectorAll('.element__image');
 
 function updateElementViews(){
   elementImages = document.querySelectorAll('.element__image');
   for (let i = 0;i<elementImages.length;i++) {
     elementImages[i].addEventListener('click', popupOpen);
   }
-}
+}*/
 
-updateElementViews();
+//updateElementViews();
+
+const elementsContainer = document.querySelector('.elements');
+
+elementsContainer.addEventListener ('click', function (evt) {
+  if (evt.target.classList.contains('element__image')) {
+    popupOpen(evt);
+  }
+});
 
 //обработчик кнопок закрытия форм и добавление обработчика на все кнопки закрытия форм
 const popups = document.querySelectorAll('.popup');
 
+function findOpenPopup() {
+  let openPopup;
+  popups.forEach(popup => {
+    if (popup.classList.contains('popup_opened')) {
+      openPopup = popup;
+    }
+  });
+  return openPopup;
+}
 
-function popupClose(evt){
-  const popup = evt.target.closest('.popup');
+
+function popupClose(){
+  const popup = findOpenPopup();
   popup.classList.remove('popup_opened');
   popup.style.opacity = 0.3;
 
 }
 
-for (let i = 0; i<popups.length; i++){
+/*for (let i = 0; i<popups.length; i++){
   let closeButton = popups[i].querySelector('.popup__close');
   closeButton.addEventListener('click', popupClose);
-}
+}*/
 
+window.addEventListener('click', function (evt) {
+  if (evt.target.classList.contains('popup')) {
+    popupClose();
+  }
+
+  if (evt.target.classList.contains('popup__close')) {
+    popupClose();
+  }
+});
+
+window.addEventListener('keydown', function (evt) {
+  if (evt.key === "Escape") {
+    popupClose();
+  }
+});
 
 
 //обработчик кнопки like
@@ -204,5 +237,4 @@ function addCard(cardObject) {
   cardsContainer.prepend(createCard(cardObject));
   updateLikeButtons();
   updateDeleteButtons();
-  updateElementViews();
 }
