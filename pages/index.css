@@ -18,6 +18,7 @@
 @import url("./../blocks/popup/__input-error/_active/popup__input-error_active.css");
 @import url("./../blocks/popup/__close/popup__close.css");
 @import url("./../blocks/popup/__save/popup__save.css");
+@import url("./../blocks/popup/__save/_inactive/popup__save_inactive.css");
 
 
 @import url("./../blocks/header/header.css");
