@@ -55,14 +55,14 @@ function findOpenPopup() {
 }
 
 //сброс сообщений об ошибках валидации
-function resetFormValidity(openPopup) {
+function resetFormValidity(openPopup, obj) {
   const formElement = openPopup.querySelector('.popup__form');
   const inputList = Array.from(formElement.querySelectorAll('.popup__input-text'));
   const buttonElement = formElement.querySelector('.popup__save');
   inputList.forEach((inputElement) => {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, obj);
   });
-  toggleButtonState(inputList, buttonElement);
+  toggleButtonState(inputList, buttonElement, obj);
 }
 
 //функция закрытия попапа с удалением слушателей событий для закрытия попапа
@@ -105,18 +105,15 @@ function removePopupClosureEventListeners() {
 let likeButtons = document.querySelectorAll('.element__like');
 
 function likeHandler(evt) {
-  evt.target.closest('.element__like').classList.toggle('element__like_active');
+  if (evt.target.classList.contains('element__like')) {
+    evt.target.closest('.element__like').classList.toggle('element__like_active');
+    }
 }
 //добавление обработчиков на все кнопки like
-function updateLikeButtons() {
-  likeButtons = document.querySelectorAll('.element__like');
-  for (let i = 0;i<likeButtons.length;i++) {
-    likeButtons[i].addEventListener('click', likeHandler);
-  }
-}
 
-updateLikeButtons();
 
+
+elementsContainer.addEventListener('click', likeHandler);
 //Добавление обработчиков на кнопки удаления элементов
 
 let deleteButtons = document.querySelector('.element__delete');
@@ -220,7 +217,7 @@ function popupHandler(evt) {
     nameInput.value=document.querySelector('.profile__name').textContent;
     bioInput.value=document.querySelector('.profile__bio').textContent;
 
-    resetFormValidity(popup);
+    resetFormValidity(popup, config);
 
     popupOpen(popup);
     setPopupClosureEventListeners();
@@ -231,7 +228,7 @@ function popupHandler(evt) {
     cardPlaceInput.value = '';
     cardUrlInput.value = '';
 
-    resetFormValidity(popup);
+    resetFormValidity(popup, config);
 
     popupOpen(popup);
     setPopupClosureEventListeners();
@@ -275,7 +272,7 @@ function createCard(cardObject) {
 function addCard(cardObject) {
   const cardsContainer = document.querySelector('.elements');
   cardsContainer.prepend(createCard(cardObject));
-  updateLikeButtons();
+  //updateLikeButtons();
   updateDeleteButtons();
 }
 
@@ -285,14 +282,14 @@ function addCard(cardObject) {
 
 
 //включение и отключение отображения ошибки ввода
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage, obj) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(obj.inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(obj.errorClass);
 };
 
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, obj) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(obj.inputErrorClass);
   errorElement.classList.remove(obj.errorClass);
@@ -300,23 +297,23 @@ const hideInputError = (formElement, inputElement) => {
 };
 
 //проверка валидности конкретного поля
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, obj) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, obj);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, obj);
   }
 };
 
 //добавление слушателей событий инпута на форму
-const setEventListeners = (formElement) => {
+const setEventListeners = (formElement, obj) => {
   const inputList = Array.from(formElement.querySelectorAll(obj.inputSelector));
   const buttonElement = formElement.querySelector(obj.submitButtonSelector);
-  toggleButtonState(inputList, buttonElement);
+  toggleButtonState(inputList, buttonElement, obj);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
+      checkInputValidity(formElement, inputElement, obj);
+      toggleButtonState(inputList, buttonElement, obj);
     });
   });
 };
@@ -328,7 +325,7 @@ const enableValidation = (obj) => {
     formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
     });
-    setEventListeners(formElement);
+    setEventListeners(formElement, obj);
   });
 };
 
@@ -342,7 +339,7 @@ function hasInvalidInput (inputList) {
 }
 
 //переключение состояния кнопки в зависимости от валидности массива инпутов
-function toggleButtonState(inputList, buttonElement) {
+function toggleButtonState(inputList, buttonElement, obj) {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(obj.inactiveButtonClass);
     buttonElement.disabled = true;
