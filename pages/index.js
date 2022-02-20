@@ -101,35 +101,23 @@ function removePopupClosureEventListeners() {
 }
 
 
-//обработчик кнопки like
-let likeButtons = document.querySelectorAll('.element__like');
-
+//добавление обработчика на кнопки like
 function likeHandler(evt) {
   if (evt.target.classList.contains('element__like')) {
     evt.target.closest('.element__like').classList.toggle('element__like_active');
     }
 }
-//добавление обработчиков на все кнопки like
-
-
 
 elementsContainer.addEventListener('click', likeHandler);
-//Добавление обработчиков на кнопки удаления элементов
 
-let deleteButtons = document.querySelector('.element__delete');
-
+//Добавление обработчика на кнопки удаления элементов
 function deleteHandler(evt) {
-  evt.target.closest('.element').remove();
-}
-
-function updateDeleteButtons() {
-  deleteButtons = document.querySelectorAll('.element__delete');
-  for (let i = 0;i<deleteButtons.length;i++) {
-    deleteButtons[i].addEventListener('click', deleteHandler);
+  if (evt.target.classList.contains('element__delete')) {
+    evt.target.closest('.element').remove();
   }
 }
 
-updateDeleteButtons();
+elementsContainer.addEventListener('click', deleteHandler);
 
 
 //обработчик отправки формы редактирования профиля
@@ -268,12 +256,10 @@ function createCard(cardObject) {
   return newCard;
 }
 
-  //функция добавления созданного элемента в разметку
+//функция добавления созданного элемента в разметку
 function addCard(cardObject) {
   const cardsContainer = document.querySelector('.elements');
   cardsContainer.prepend(createCard(cardObject));
-  //updateLikeButtons();
-  updateDeleteButtons();
 }
 
 
