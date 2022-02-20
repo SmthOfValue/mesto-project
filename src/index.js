@@ -1,7 +1,7 @@
-import {enableValidation} from "../src/components/validate.js";
-import {config, profileEditForm, cardAddForm, popups} from "../src/components/utils.js";
-import {likeHandler, deleteHandler, cardSubmitHandler, addCard} from "../src/components/card.js";
-import {profileSubmitHandler, popupHandler} from "../src/components/modal.js";
+import {enableValidation} from "./components/validate.js";
+import {config, profileEditForm, cardAddForm, popups} from "./components/utils.js";
+import {likeHandler, deleteHandler, cardSubmitHandler, addCard} from "./components/card.js";
+import {profileSubmitHandler, popupHandler} from "./components/modal.js";
 
 // Дается display: flex с задержкой при загрузке, чтобы не возникало мелькание popup при загрузке/обновлении страницы
 function addFlex(){
