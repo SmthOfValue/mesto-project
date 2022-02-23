@@ -1,5 +1,5 @@
 import {cardPlaceInput, cardUrlInput} from "./utils.js";
-import {popupClose} from "./modal.js";
+import {closePopup, openImagePopup} from "./modal.js";
 
 //функция создания элемента из template
 function createCard(cardObject) {
@@ -9,6 +9,10 @@ function createCard(cardObject) {
   newCard.querySelector('.element__name').textContent = cardObject.cardName;
   newCard.querySelector('.element__image').alt = cardObject.cardName;
   newCard.querySelector('.element__image').src = cardObject.cardSource;
+
+  newCard.querySelector('.element__like').addEventListener('click', likeCard);
+  newCard.querySelector('.element__delete').addEventListener('click', deleteCard);
+  newCard.querySelector('.element__image').addEventListener('click', openImagePopup);
 
   return newCard;
 }
@@ -32,21 +36,17 @@ function cardSubmitHandler(evt) {
   addCard(cardObject);
   cardPlaceInput.value = '';
   cardUrlInput.value = '';
-  popupClose(evt);
+  closePopup(evt);
 }
 
 //обработчик кнопки удаления элементов
-function deleteHandler(evt) {
-  if (evt.target.classList.contains('element__delete')) {
-    evt.target.closest('.element').remove();
-  }
+function deleteCard(evt) {
+  evt.target.closest('.element').remove();
 }
 
 //обработчик кнопки like
-function likeHandler(evt) {
-  if (evt.target.classList.contains('element__like')) {
-    evt.target.closest('.element__like').classList.toggle('element__like_active');
-    }
+function likeCard(evt) {
+  evt.target.closest('.element__like').classList.toggle('element__like_active');
 }
 
-export {likeHandler, deleteHandler, cardSubmitHandler, addCard};
+export {cardSubmitHandler, addCard};

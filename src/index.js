@@ -1,7 +1,7 @@
 import {enableValidation} from "./components/validate.js";
 import {config, profileEditForm, cardAddForm, popups} from "./components/utils.js";
-import {likeHandler, deleteHandler, cardSubmitHandler, addCard} from "./components/card.js";
-import {profileSubmitHandler, popupHandler} from "./components/modal.js";
+import {cardSubmitHandler, addCard} from "./components/card.js";
+import {profileSubmitHandler, openProfileEditPopup, openCardAddPopup} from "./components/modal.js";
 
 import './pages/index.css';
 // Дается display: flex с задержкой при загрузке, чтобы не возникало мелькание popup при загрузке/обновлении страницы
@@ -13,19 +13,6 @@ function addFlex(){
   }, 1000);
 }
 window.addEventListener('load', addFlex);
-
-//добавление обработчиков на открытие попапа с картинкой
-const elementsContainer = document.querySelector('.elements');
-
-elementsContainer.addEventListener ('click', function (evt) {
-  if (evt.target.classList.contains('element__image')) {
-    popupHandler(evt);
-  }
-});
-//добавление обработчика кнопок Like, Delete
-elementsContainer.addEventListener('click', likeHandler);
-
-elementsContainer.addEventListener('click', deleteHandler);
 
 //добавление обработчика изменения профиля и добавления новой карточки
 profileEditForm.addEventListener('submit', profileSubmitHandler);
@@ -67,10 +54,10 @@ initialCards.forEach(function (item) {
 
 //добавление обработчиков на кнопки открытия форм
 const addButton=document.querySelector('.profile__add');
-addButton.addEventListener('click', popupHandler);
+addButton.addEventListener('click', openCardAddPopup);
 
 const editButton=document.querySelector('.profile__edit');
-editButton.addEventListener('click', popupHandler);
+editButton.addEventListener('click', openProfileEditPopup);
 
 enableValidation(config);
 

@@ -1,8 +1,8 @@
 //сброс сообщений об ошибках валидации
 function resetFormValidity(openPopup, obj) {
-  const formElement = openPopup.querySelector('.popup__form');
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input-text'));
-  const buttonElement = formElement.querySelector('.popup__save');
+  const formElement = openPopup.querySelector(obj.formSelector);
+  const inputList = Array.from(formElement.querySelectorAll(obj.inputSelector));
+  const buttonElement = formElement.querySelector(obj.submitButtonSelector);
   inputList.forEach((inputElement) => {
     hideInputError(formElement, inputElement, obj);
   });
