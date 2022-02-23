@@ -1,104 +1,101 @@
 import {config, popups, cardPlaceInput, cardUrlInput, profileNameInput, profileBioInput} from "./utils.js";
 import {resetFormValidity} from "./validate.js";
 
+const nameInput=document.querySelector('#profile-name-input');
+const bioInput=document.querySelector('#profile-bio-input');
+const profileEditPopup = document.querySelector('#profile-edit-popup');
+const cardAddPopup = document.querySelector('#card-add-popup');
+const imagePopup = document.querySelector('#image-popup');
+const activeImage = imagePopup.querySelector('.popup__image');
+const activeImageCaption = imagePopup.querySelector('.popup__caption');
+const profileName = document.querySelector('.profile__name');
+const profileBio = document.querySelector('.profile__bio');
+
 
 //функция открытия попапа в зависимости от нажатой кнопки с установкой слушателей событий для закрытия попапа
-function popupHandler(evt) {
-  if (evt.target.classList.contains('profile__edit')) {
-    const nameInput=document.querySelector('#profile-name-input');
-    const bioInput=document.querySelector('#profile-bio-input');
-    const popup = document.querySelector('#profile-edit-popup');
-
-    nameInput.value=document.querySelector('.profile__name').textContent;
-    bioInput.value=document.querySelector('.profile__bio').textContent;
-
-    resetFormValidity(popup, config);
-
-    popupOpen(popup);
-    setPopupClosureEventListeners();
-  }
-  if (evt.target.classList.contains('profile__add')) {
-    const popup = document.querySelector('#card-add-popup');
-
-    cardPlaceInput.value = '';
-    cardUrlInput.value = '';
-
-    resetFormValidity(popup, config);
-
-    popupOpen(popup);
-    setPopupClosureEventListeners();
-  }
-  if (evt.target.classList.contains('element__image')) {
-    const popup = document.querySelector('#image-popup');
-
-    popup.querySelector('.popup__image').src = evt.target.src;
-    popup.querySelector('.popup__caption').textContent = evt.target.alt;
-
-    popupOpen(popup);
-    popup.style.background = "rgba(0, 0, 0, 0.9)";
-
-    setPopupClosureEventListeners();
-  }
+function openProfileEditPopup() {
+  nameInput.value = profileName.textContent;
+  bioInput.value = profileBio.textContent;
+  resetFormValidity(profileEditPopup, config);
+  openPopup(profileEditPopup);
 }
 
-function popupOpen(popup) {
+function openCardAddPopup() {
+  cardPlaceInput.value = '';
+  cardUrlInput.value = '';
+  resetFormValidity(cardAddPopup, config);
+  openPopup(cardAddPopup);
+}
+
+function openImagePopup(evt) {
+  activeImage.src = evt.target.src;
+  activeImage.alt = evt.target.alt;
+  activeImageCaption.textContent = evt.target.alt;
+  openPopup(imagePopup);
+  imagePopup.style.background = "rgba(0, 0, 0, 0.9)";
+}
+
+function openPopup(popup) {
   popup.classList.add('popup_opened');
   popup.style.opacity = 1;
+  setPopupClosureEventListeners(popup);
 }
 
 //функции установки и удаления слушателей событий закрытия попапа
-function setPopupClosureEventListeners() {
-  window.addEventListener('keydown', popupCloseHandler);
-  window.addEventListener('click', popupCloseHandler);
+function setPopupClosureEventListeners(popup) {
+  window.addEventListener('keydown', closePopupOnEsc);
+  popup.addEventListener('click', closePopupOnClick);
 }
 
-function removePopupClosureEventListeners() {
-  window.removeEventListener('keydown', popupCloseHandler);
-  window.removeEventListener('click', popupCloseHandler);
+function removePopupClosureEventListeners(popup) {
+  window.removeEventListener('keydown', closePopupOnEsc);
+  popup.removeEventListener('click', closePopupOnClick);
 }
 
 //функция закрытия попапа с удалением слушателей событий для закрытия попапа
-function popupClose(){
-  const openPopup = findOpenPopup();
-  removePopupClosureEventListeners();
-  openPopup.classList.remove('popup_opened');
-  openPopup.style.opacity = 0.3;
+function closePopup(){
+  const activePopup = findActivePopup();
+  removePopupClosureEventListeners(activePopup);
+  activePopup.classList.remove('popup_opened');
+  activePopup.style.opacity = 0.3;
 
 }
 
-//функция обработчик разных способов закрытия попапа
-function popupCloseHandler (evt) {
+//функции обработчики разных способов закрытия попапа
+function closePopupOnEsc (evt) {
   if (evt.key === "Escape") {
-    popupClose();
+    closePopup();
   }
+}
 
+function closePopupOnClick (evt) {
   if (evt.target.classList.contains('popup')) {
-    popupClose();
+    closePopup();
   }
 
   if (evt.target.classList.contains('popup__close')) {
-    popupClose();
+    closePopup();
   }
 }
 
 //функция нахождения открытого попапа
-function findOpenPopup() {
-  let openPopup;
+function findActivePopup() {
+  let activePopup;
   popups.forEach(popup => {
     if (popup.classList.contains('popup_opened')) {
-      openPopup = popup;
+      activePopup = popup;
     }
   });
 
-  return openPopup;
+  return activePopup;
 }
 
 //обработчик отправки формы редактирования профиля
 function profileSubmitHandler(evt) {
   evt.preventDefault();
-  document.querySelector('.profile__name').textContent = profileNameInput.value;
-  document.querySelector('.profile__bio').textContent = profileBioInput.value;
-  popupClose(evt);
+  profileName.textContent = profileNameInput.value;
+  profileBio.textContent = profileBioInput.value;
+  closePopup();
 }
 
-export {profileSubmitHandler, popupHandler, popupClose};
+export {profileSubmitHandler, openProfileEditPopup, openCardAddPopup, openImagePopup, closePopup};
