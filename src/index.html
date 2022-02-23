@@ -4,17 +4,16 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Место</title>
 </head>
 <body class="page">
   <header class="header">
-    <img src="./images/logo_dark.svg" alt="Логотип Место Россия" class="header__logo">
+    <img src="<%=require('./images/logo_dark.svg')%>" alt="Логотип Место Россия" class="header__logo">
   </header>
   <main>
     <section class="profile">
       <div class="profile__card">
-        <img src="./images/cousteau.jpg" alt="Фотография Кусто" class="profile__avatar">
+        <img src="<%=require('./images/cousteau.jpg')%>" alt="Фотография Кусто" class="profile__avatar">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__edit" type="button" aria-label="Редактировать профиль"></button>
@@ -34,8 +33,14 @@
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form" name="profile-edit-form" id='profile-edit-form'>
-        <input type="text" class="popup__input-text popup__input-text_field_name" id="profile-name-input" name="profile-name-input" value="Жак-Ив Кусто">
-        <input type="text" class="popup__input-text popup__input-text_field_bio" id="profile-bio-input" name="profile-bio-input" value="Исследователь океана">
+        <label for="profile-name-input" class="popup__field">
+          <input type="text" class="popup__input-text popup__input-text_field_name" id="profile-name-input" name="profile-name-input" value="Жак-Ив Кусто" required minlength=2 maxlength=40>
+          <span class="popup__input-error profile-name-input-error">test</span>
+        </label>
+        <label for="profile-bio-input" class="popup__field">
+          <input type="text" class="popup__input-text popup__input-text_field_bio" id="profile-bio-input" name="profile-bio-input" value="Исследователь океана" required minlength=2 maxlength=200>
+          <span class="popup__input-error profile-bio-input-error">test</span>
+        </label>
         <button class="popup__save" type="submit">Сохранить</button>
       </form>
       <button class="popup__close" type="button" aria-label="Закрыть форму"></button>
@@ -45,8 +50,14 @@
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
       <form class="popup__form" name="card-add-form" id='card-add-form'>
-        <input type="text" class="popup__input-text popup__input-text_field_place" id="card-place-input" name="card-place-input" placeholder="Название">
-        <input type="text" class="popup__input-text popup__input-text_field_url" id="card-url-input" name="card-url-input" placeholder="Ссылка на картинку">
+        <label for="card-place-input" class="popup__field">
+          <input type="text" class="popup__input-text popup__input-text_field_place" id="card-place-input" name="card-place-input" placeholder="Название" required minlength=2 maxlength=30>
+          <span class="popup__input-error card-place-input-error">test</span>
+        </label>
+        <label for="card-url-input" class="popup__field">
+          <input type="url" class="popup__input-text popup__input-text_field_url" id="card-url-input" name="card-url-input" placeholder="Ссылка на картинку" required>
+          <span class="popup__input-error card-url-input-error">test</span>
+        </label>
         <button class="popup__save" type="submit">Создать</button>
       </form>
       <button class="popup__close" type="button" aria-label="Закрыть форму"></button>
@@ -70,6 +81,10 @@
       <button class="element__delete" type="button"></button>
     </article>
   </template>
-  <script src="./pages/index.js"></script>
+  <!--<script type="module" src="./components/utils.js"></script>
+  <script type="module" src="./components/card.js"></script>
+  <script type="module" src="./components/modal.js"></script>
+  <script type="module" src="./components/validate.js"></script>
+  <script type="module" src="./index.js"></script> -->
 </body>
 </html>

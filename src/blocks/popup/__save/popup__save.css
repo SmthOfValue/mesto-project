@@ -16,7 +16,7 @@
   transition: 0.6s;
 }
 
-.popup__save:hover {
+.popup__save:hover:enabled {
   cursor: pointer;
   opacity: 0.8;
 }
