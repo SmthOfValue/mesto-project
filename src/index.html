@@ -4,17 +4,16 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Место</title>
 </head>
 <body class="page">
   <header class="header">
-    <img src="./images/logo_dark.svg" alt="Логотип Место Россия" class="header__logo">
+    <img src="<%=require('./images/logo_dark.svg')%>" alt="Логотип Место Россия" class="header__logo">
   </header>
   <main>
     <section class="profile">
       <div class="profile__card">
-        <img src="./images/cousteau.jpg" alt="Фотография Кусто" class="profile__avatar">
+        <img src="<%=require('./images/cousteau.jpg')%>" alt="Фотография Кусто" class="profile__avatar">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__edit" type="button" aria-label="Редактировать профиль"></button>
@@ -82,10 +81,10 @@
       <button class="element__delete" type="button"></button>
     </article>
   </template>
-  <script type="module" src="./src/components/utils.js"></script>
-  <script type="module" src="./src/components/card.js"></script>
-  <script type="module" src="./src/components/modal.js"></script>
-  <script type="module" src="./src/components/validate.js"></script>
-  <script type="module" src="./src/index.js"></script>
+  <!--<script type="module" src="./components/utils.js"></script>
+  <script type="module" src="./components/card.js"></script>
+  <script type="module" src="./components/modal.js"></script>
+  <script type="module" src="./components/validate.js"></script>
+  <script type="module" src="./index.js"></script> -->
 </body>
 </html>
