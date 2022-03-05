@@ -65,4 +65,18 @@ const uploadCard = (cardObject) => {
   });
 }
 
-export {getInitialCards, getUserInfo, uploadCard};
+const updateProfile = (profileObject) => {
+  return fetch(`${fetchConfig.baseUrl}/users/me`,{
+    headers: fetchConfig.headers,
+    method: 'PATCH',
+    body: JSON.stringify(profileObject)
+  })
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка при обновлении профиля: ${res.status}`);
+  });
+}
+
+export {getInitialCards, getUserInfo, uploadCard, updateProfile};

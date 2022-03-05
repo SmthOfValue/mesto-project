@@ -1,5 +1,6 @@
 import {config, popups, cardPlaceInput, cardUrlInput, profileNameInput, profileBioInput, profileName, profileBio} from "./utils.js";
 import {resetFormValidity} from "./validate.js";
+import {updateProfile} from "./api.js";
 
 const nameInput=document.querySelector('#profile-name-input');
 const bioInput=document.querySelector('#profile-bio-input');
@@ -91,9 +92,18 @@ function findActivePopup() {
 //обработчик отправки формы редактирования профиля
 function profileSubmitHandler(evt) {
   evt.preventDefault();
-  profileName.textContent = profileNameInput.value;
-  profileBio.textContent = profileBioInput.value;
+  const profileObject = {
+    "name": profileNameInput.value,
+    "about": profileBioInput.value
+  }
   closePopup();
+  updateProfile(profileObject)
+    .then((updatedProfile) => {
+      console.log(updatedProfile);
+      profileName.textContent = updatedProfile.name;
+      profileBio.textContent = updatedProfile.about;
+    });
+
 }
 
 export {profileSubmitHandler, openProfileEditPopup, openCardAddPopup, openImagePopup, closePopup};
