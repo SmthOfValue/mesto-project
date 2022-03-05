@@ -1,7 +1,8 @@
 import {enableValidation} from "./components/validate.js";
-import {config, profileEditForm, cardAddForm, popups} from "./components/utils.js";
+import {config, profileEditForm, cardAddForm, popups, profileName, profileBio, profileAvatar} from "./components/utils.js";
 import {cardSubmitHandler, addCard} from "./components/card.js";
 import {profileSubmitHandler, openProfileEditPopup, openCardAddPopup} from "./components/modal.js";
+import {getInitialCards, getUserInfo} from "./components/api.js";
 
 import './pages/index.css';
 // Дается display: flex с задержкой при загрузке, чтобы не возникало мелькание popup при загрузке/обновлении страницы
@@ -14,6 +15,16 @@ function addFlex(){
 }
 window.addEventListener('load', addFlex);
 
+//добавление данных о пользователе
+getUserInfo()
+.then((userInfo) => {
+  console.log(userInfo);
+  profileName.textContent = userInfo.name;
+  profileBio.textContent = userInfo.about;
+  profileAvatar.src = userInfo.avatar;
+  profileAvatar.alt = userInfo.name;
+});
+
 //добавление обработчика изменения профиля и добавления новой карточки
 profileEditForm.addEventListener('submit', profileSubmitHandler);
 
@@ -21,36 +32,16 @@ cardAddForm.addEventListener('submit', cardSubmitHandler);
 
 
 //добавление изначального набора элементов на страницу
-const initialCards = [
-  {
-    cardName: 'Архыз',
-    cardSource: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    cardName: 'Челябинская область',
-    cardSource: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    cardName: 'Иваново',
-    cardSource: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    cardName: 'Камчатка',
-    cardSource: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    cardName: 'Холмогорский район',
-    cardSource: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    cardName: 'Байкал',
-    cardSource: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+getInitialCards()
+  .then((data) => {
+    console.log(data);
+    data.forEach(function (item) {
+      addCard(item);
+    });
+  });
 
-initialCards.forEach(function (item) {
-  addCard(item);
-});
+
+
 
 //добавление обработчиков на кнопки открытия форм
 const addButton=document.querySelector('.profile__add');

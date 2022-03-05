@@ -1,4 +1,4 @@
-import {config, popups, cardPlaceInput, cardUrlInput, profileNameInput, profileBioInput} from "./utils.js";
+import {config, popups, cardPlaceInput, cardUrlInput, profileNameInput, profileBioInput, profileName, profileBio} from "./utils.js";
 import {resetFormValidity} from "./validate.js";
 
 const nameInput=document.querySelector('#profile-name-input');
@@ -8,8 +8,6 @@ const cardAddPopup = document.querySelector('#card-add-popup');
 const imagePopup = document.querySelector('#image-popup');
 const activeImage = imagePopup.querySelector('.popup__image');
 const activeImageCaption = imagePopup.querySelector('.popup__caption');
-const profileName = document.querySelector('.profile__name');
-const profileBio = document.querySelector('.profile__bio');
 
 
 //функция открытия попапа в зависимости от нажатой кнопки с установкой слушателей событий для закрытия попапа

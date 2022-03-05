@@ -1,14 +1,15 @@
 import {cardPlaceInput, cardUrlInput} from "./utils.js";
 import {closePopup, openImagePopup} from "./modal.js";
+import {uploadCard} from "./api.js";
 
 //функция создания элемента из template
 function createCard(cardObject) {
   const cardTemplate = document.querySelector('.element-template').content;
   const newCard = cardTemplate.querySelector('.element').cloneNode(true);
 
-  newCard.querySelector('.element__name').textContent = cardObject.cardName;
-  newCard.querySelector('.element__image').alt = cardObject.cardName;
-  newCard.querySelector('.element__image').src = cardObject.cardSource;
+  newCard.querySelector('.element__name').textContent = cardObject.name;
+  newCard.querySelector('.element__image').alt = cardObject.name;
+  newCard.querySelector('.element__image').src = cardObject.link;
 
   newCard.querySelector('.element__like').addEventListener('click', likeCard);
   newCard.querySelector('.element__delete').addEventListener('click', deleteCard);
@@ -30,10 +31,14 @@ function addCard(cardObject) {
 function cardSubmitHandler(evt) {
   evt.preventDefault();
   const cardObject = {
-    'cardName': cardPlaceInput.value,
-    'cardSource': cardUrlInput.value
-}
-  addCard(cardObject);
+    "name": cardPlaceInput.value,
+    "link": cardUrlInput.value
+  }
+  uploadCard(cardObject)
+    .then((newCard) => {
+      console.log(newCard);
+      addCard(newCard);
+    });
   cardPlaceInput.value = '';
   cardUrlInput.value = '';
   closePopup(evt);
