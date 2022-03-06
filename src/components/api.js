@@ -6,27 +6,6 @@ const fetchConfig = {
   }
 }
 
-/*fetch('https://nomoreparties.co/v1/plus-cohort7/cards', {
-  headers: {
-    authorization: '9efb02c5-3a98-4492-ad54-7eb38e1b2fa2'
-  }
-})
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  });
-
-  fetch('https://nomoreparties.co/v1/plus-cohort7/users/me', {
-    headers: {
-      authorization: '9efb02c5-3a98-4492-ad54-7eb38e1b2fa2'
-    }
-  })
-    .then(res => res.json())
-    .then((result) => {
-      console.log(result);
-    });
-*/
-
 const getInitialCards = () => {
   return fetch(`${fetchConfig.baseUrl}/cards`,{
     headers: fetchConfig.headers
@@ -79,4 +58,30 @@ const updateProfile = (profileObject) => {
   });
 }
 
-export {getInitialCards, getUserInfo, uploadCard, updateProfile};
+const deleteCardOnServer = (cardId) => {
+  return fetch(`${fetchConfig.baseUrl}/cards/${cardId}`,{
+    headers: fetchConfig.headers,
+    method: 'DELETE',
+  })
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка при удалении карты: ${res.status}`);
+  });
+}
+
+const setLikeOnServer = (cardId, likeAction) => {
+  return fetch(`${fetchConfig.baseUrl}/cards/likes/${cardId}`,{
+    headers: fetchConfig.headers,
+    method: likeAction,
+  })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка при постановке лайка: ${res.status}`);
+    });
+}
+
+export {getInitialCards, getUserInfo, uploadCard, updateProfile, deleteCardOnServer, setLikeOnServer};

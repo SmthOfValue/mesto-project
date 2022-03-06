@@ -2,7 +2,8 @@ import {enableValidation} from "./components/validate.js";
 import {config, profileEditForm, cardAddForm, popups, profileName, profileBio, profileAvatar} from "./components/utils.js";
 import {cardSubmitHandler, addCard} from "./components/card.js";
 import {profileSubmitHandler, openProfileEditPopup, openCardAddPopup} from "./components/modal.js";
-import {getInitialCards, getUserInfo} from "./components/api.js";
+import {getInitialCards} from "./components/api.js";
+import {userInfo} from "./components/user.js";
 
 import './pages/index.css';
 // Дается display: flex с задержкой при загрузке, чтобы не возникало мелькание popup при загрузке/обновлении страницы
@@ -15,15 +16,15 @@ function addFlex(){
 }
 window.addEventListener('load', addFlex);
 
-//добавление данных о пользователе
-getUserInfo()
-.then((userInfo) => {
-  console.log(userInfo);
-  profileName.textContent = userInfo.name;
-  profileBio.textContent = userInfo.about;
-  profileAvatar.src = userInfo.avatar;
-  profileAvatar.alt = userInfo.name;
-});
+//загрузка данных о пользователе с сервера
+userInfo
+  .then((userInfo) => {
+    console.log(userInfo);
+    profileName.textContent = userInfo.name;
+    profileBio.textContent = userInfo.about;
+    profileAvatar.src = userInfo.avatar;
+    profileAvatar.alt = userInfo.name;
+  });
 
 //добавление обработчика изменения профиля и добавления новой карточки
 profileEditForm.addEventListener('submit', profileSubmitHandler);
@@ -51,5 +52,4 @@ const editButton=document.querySelector('.profile__edit');
 editButton.addEventListener('click', openProfileEditPopup);
 
 enableValidation(config);
-
 

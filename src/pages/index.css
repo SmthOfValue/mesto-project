@@ -42,6 +42,7 @@
 @import url("./../blocks/element/__like/element__like.css");
 @import url("./../blocks/element/__like/_active/element__like_active.css");
 @import url("./../blocks/element/__delete/element__delete.css");
+@import url("./../blocks/element/__delete/_active/element__delete_active.css");
 @import url("./../blocks/element/__like-info/element__like-info.css");
 @import url("./../blocks/element/__like-count/element__like-count.css");
 
