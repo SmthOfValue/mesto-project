@@ -1,8 +1,7 @@
 .profile__avatar {
-  border-radius: 50%;
+  position: relative;
   width: 120px;
   height: 120px;
-  object-fit: cover
 }
 
 @media screen and (max-width: 950px) {
@@ -10,3 +9,19 @@
     margin: 0 auto;
   }
 }
+
+.profile__avatar:hover::after {
+  background: rgba(0, 0, 0, 0.8);
+  background-image: url("./../../../images/avatarEdit.svg");
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  display: block;
+  height: 100%;
+  width: 100%;
+  background-size: 26px 26px;
+  background-position: center center;
+}
+

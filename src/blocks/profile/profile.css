@@ -6,6 +6,8 @@
   flex-direction: row;
   justify-content: space-between;
   color: #fff;
+  position: relative;
+  z-index: 0;
 }
 
 @media screen and (max-width: 950px) {
