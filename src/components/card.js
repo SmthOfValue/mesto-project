@@ -1,11 +1,11 @@
 import {cardPlaceInput, cardUrlInput} from "./utils.js";
-import {closePopup, openImagePopup} from "./modal.js";
+import {closePopup, openImagePopup, cardAddPopup, renderLoading} from "./modal.js";
 import {uploadCard, deleteCardOnServer, setLikeOnServer} from "./api.js";
-import {userInfo} from "./user.js";
+import {userInfo} from "./utils.js";
 
 const cardsContainer = document.querySelector('.elements');
 
-//функция создания элемента из template
+//функция создания элемента из template после загрузки данных пользователя
 function createCard(cardObject) {
   const cardTemplate = document.querySelector('.element-template').content;
   const newCard = cardTemplate.querySelector('.element').cloneNode(true);
@@ -34,6 +34,9 @@ function createCard(cardObject) {
       else {
         newCard.dataset.likedByMe = false;
       }
+  })
+  .catch((err) => {
+    console.log(err);
   });
 
   return newCard;
@@ -52,16 +55,19 @@ function cardSubmitHandler(evt) {
     "name": cardPlaceInput.value,
     "link": cardUrlInput.value
   }
-
+  const originalButtonText = renderLoading(cardAddPopup, true);
   uploadCard(cardObject)
     .then((newCard) => {
-      console.log(newCard);
       addCard(newCard);
+    })
+    .catch((err) => {
+      console.log(err);
     })
     .finally(() => {
       cardPlaceInput.value = '';
       cardUrlInput.value = '';
       closePopup(evt);
+      renderLoading(cardAddPopup, false, originalButtonText);
     });
 
 }
@@ -72,6 +78,9 @@ function deleteCard(evt) {
   deleteCardOnServer(cardId)
     .then(() => {
       evt.target.closest('.element').remove();
+    })
+    .catch((err) => {
+      console.log(err);
     });
 }
 //функция переключения стиля кнопки Like
@@ -99,6 +108,9 @@ function likeCard(evt) {
       cardElement.querySelector('.element__like-count').textContent = updatedCard.likes.length;
       cardElement.dataset.likedByMe = !JSON.parse(cardElement.dataset.likedByMe);
       renderLike(cardElement);
+    })
+    .catch((err) => {
+      console.log(err);
     });
   }
 

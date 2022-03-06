@@ -5,7 +5,7 @@ const fetchConfig = {
     'Content-Type': 'application/json'
   }
 }
-
+//запрос на получение карточек для загрузки на страницу
 const getInitialCards = () => {
   return fetch(`${fetchConfig.baseUrl}/cards`,{
     headers: fetchConfig.headers
@@ -18,6 +18,7 @@ const getInitialCards = () => {
     });
 }
 
+//запрос на получение данных пользователя
 const getUserInfo = () => {
   return fetch(`${fetchConfig.baseUrl}/users/me`,{
     headers: fetchConfig.headers
@@ -30,6 +31,7 @@ const getUserInfo = () => {
     });
 }
 
+//запрос на загрузку карточки на сервер
 const uploadCard = (cardObject) => {
   return fetch(`${fetchConfig.baseUrl}/cards`,{
     headers: fetchConfig.headers,
@@ -44,6 +46,7 @@ const uploadCard = (cardObject) => {
   });
 }
 
+//запрос на обновление профиля пользоватлея
 const updateProfile = (profileObject) => {
   return fetch(`${fetchConfig.baseUrl}/users/me`,{
     headers: fetchConfig.headers,
@@ -58,6 +61,7 @@ const updateProfile = (profileObject) => {
   });
 }
 
+//запрос на удаление карточки с сервера
 const deleteCardOnServer = (cardId) => {
   return fetch(`${fetchConfig.baseUrl}/cards/${cardId}`,{
     headers: fetchConfig.headers,
@@ -71,6 +75,7 @@ const deleteCardOnServer = (cardId) => {
   });
 }
 
+//запрос на постановку/снятие лайка
 const setLikeOnServer = (cardId, likeAction) => {
   return fetch(`${fetchConfig.baseUrl}/cards/likes/${cardId}`,{
     headers: fetchConfig.headers,
@@ -84,4 +89,19 @@ const setLikeOnServer = (cardId, likeAction) => {
     });
 }
 
-export {getInitialCards, getUserInfo, uploadCard, updateProfile, deleteCardOnServer, setLikeOnServer};
+//запрос на загрузку нового аватара
+const uploadNewAvatar = (avatarLink) => {
+  return fetch(`${fetchConfig.baseUrl}/users/me/avatar`,{
+    headers: fetchConfig.headers,
+    method: 'PATCH',
+    body: JSON.stringify({"avatar": avatarLink})
+  })
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка при обновлении профиля: ${res.status}`);
+  });
+}
+
+export {getInitialCards, getUserInfo, uploadCard, updateProfile, deleteCardOnServer, setLikeOnServer, uploadNewAvatar};

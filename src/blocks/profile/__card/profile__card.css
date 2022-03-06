@@ -1,7 +1,8 @@
 .profile__card {
   display: grid;
   grid-template-columns: 120px 1fr;
-  gap: 30px
+  gap: 30px;
+  position: relative;
 }
 
 @media screen and (max-width: 950px) {
