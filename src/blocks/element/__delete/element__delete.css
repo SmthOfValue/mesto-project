@@ -12,9 +12,12 @@
   right: 20px;
   top: 20px;
   z-index: 2;
+  display: none;
 }
 
 .element__delete:hover {
   opacity: 0.6;
   cursor: pointer;
 }
+
+

@@ -1,15 +1,16 @@
-import {config, popups, cardPlaceInput, cardUrlInput, profileNameInput, profileBioInput} from "./utils.js";
+import {config, popups, cardPlaceInput, cardUrlInput, profileNameInput, profileBioInput, profileName, profileBio, profileAvatar} from "./utils.js";
 import {resetFormValidity} from "./validate.js";
+import {updateProfile, uploadNewAvatar} from "./api.js";
 
 const nameInput=document.querySelector('#profile-name-input');
 const bioInput=document.querySelector('#profile-bio-input');
 const profileEditPopup = document.querySelector('#profile-edit-popup');
 const cardAddPopup = document.querySelector('#card-add-popup');
 const imagePopup = document.querySelector('#image-popup');
+const avatarEditPopup = document.querySelector('#avatar-edit-popup');
+const avatarLinkInput = document.querySelector('#avatar-link-input');
 const activeImage = imagePopup.querySelector('.popup__image');
 const activeImageCaption = imagePopup.querySelector('.popup__caption');
-const profileName = document.querySelector('.profile__name');
-const profileBio = document.querySelector('.profile__bio');
 
 
 //функция открытия попапа в зависимости от нажатой кнопки с установкой слушателей событий для закрытия попапа
@@ -93,9 +94,62 @@ function findActivePopup() {
 //обработчик отправки формы редактирования профиля
 function profileSubmitHandler(evt) {
   evt.preventDefault();
-  profileName.textContent = profileNameInput.value;
-  profileBio.textContent = profileBioInput.value;
-  closePopup();
+  const profileObject = {
+    "name": profileNameInput.value,
+    "about": profileBioInput.value
+  }
+  const originalButtonText = renderLoading(profileEditPopup, true);
+  updateProfile(profileObject)
+    .then((updatedProfile) => {
+      profileName.textContent = updatedProfile.name;
+      profileBio.textContent = updatedProfile.about;
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      closePopup();
+      renderLoading(profileEditPopup, false, originalButtonText);
+    });
+
 }
 
-export {profileSubmitHandler, openProfileEditPopup, openCardAddPopup, openImagePopup, closePopup};
+//функция открытия попапа редактирования аватара
+function openAvatarEditPopup() {
+  avatarLinkInput.value = '';
+  resetFormValidity(avatarEditPopup, config);
+  openPopup(avatarEditPopup);
+}
+
+//обработчик отправки формы редактирования аватара
+function submitNewAvatar(evt) {
+  evt.preventDefault();
+  const avatarLink = avatarLinkInput.value;
+  const originalButtonText = renderLoading(avatarEditPopup, true);
+  uploadNewAvatar(avatarLink)
+    .then((updatedUser) => {
+      profileAvatar.src = updatedUser.avatar;
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      closePopup();
+      renderLoading(avatarEditPopup, false, originalButtonText);
+    });
+
+}
+//функция отображения загрузки при отправке формы
+function renderLoading(popup, isSaving, originalText) {
+  const saveButton = popup.querySelector('.popup__save');
+  if (isSaving) {
+    const buttonOriginalText = saveButton.textContent;
+    saveButton.textContent = 'Сохранение...';
+    return buttonOriginalText;
+  }
+  else {
+    saveButton.textContent = originalText;
+  }
+}
+
+export {profileSubmitHandler, openProfileEditPopup, openCardAddPopup, openImagePopup, closePopup, openAvatarEditPopup, submitNewAvatar, cardAddPopup, renderLoading};
