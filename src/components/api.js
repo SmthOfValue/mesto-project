@@ -5,16 +5,22 @@ const fetchConfig = {
     'Content-Type': 'application/json'
   }
 }
+
+//функция проверки ответа на запрос
+function getResponseData(res) {
+  if (!res.ok) {
+      return Promise.reject(`Ошибка: ${res.status}`);
+  }
+  return res.json();
+}
+
 //запрос на получение карточек для загрузки на страницу
 const getInitialCards = () => {
   return fetch(`${fetchConfig.baseUrl}/cards`,{
     headers: fetchConfig.headers
   })
     .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка при загрузке карточек: ${res.status}`);
+      return getResponseData(res);
     });
 }
 
@@ -24,10 +30,7 @@ const getUserInfo = () => {
     headers: fetchConfig.headers
   })
     .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка при получении данных пользователя: ${res.status}`);
+      return getResponseData(res);
     });
 }
 
@@ -39,10 +42,7 @@ const uploadCard = (cardObject) => {
     body: JSON.stringify(cardObject)
   })
   .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка при загрузке карточки: ${res.status}`);
+    return getResponseData(res);
   });
 }
 
@@ -54,10 +54,7 @@ const updateProfile = (profileObject) => {
     body: JSON.stringify(profileObject)
   })
   .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка при обновлении профиля: ${res.status}`);
+    return getResponseData(res);
   });
 }
 
@@ -68,10 +65,7 @@ const deleteCardOnServer = (cardId) => {
     method: 'DELETE',
   })
   .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка при удалении карты: ${res.status}`);
+    return getResponseData(res);
   });
 }
 
@@ -82,10 +76,7 @@ const setLikeOnServer = (cardId, likeAction) => {
     method: likeAction,
   })
     .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка при постановке лайка: ${res.status}`);
+      return getResponseData(res);
     });
 }
 
@@ -97,10 +88,7 @@ const uploadNewAvatar = (avatarLink) => {
     body: JSON.stringify({"avatar": avatarLink})
   })
   .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка при обновлении профиля: ${res.status}`);
+    return getResponseData(res);
   });
 }
 
