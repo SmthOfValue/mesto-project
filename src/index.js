@@ -1,5 +1,5 @@
 import {resetFormValidity, enableValidation} from "./components/validate.js";
-import {config, profileEditForm, cardAddForm, popups, profileName, profileBio, nameInput, bioInput, profileAvatar, avatarEditForm, avatarEditPopup, avatarLinkInput, cardPlaceInput, cardUrlInput, activeImage, activeImageCaption, imagePopup, profileEditPopup, cardAddPopup} from "./components/utils.js";
+import {config, openImagePopup, profileEditForm, cardAddForm, popups, profileName, profileBio, nameInput, bioInput, profileAvatar, avatarEditForm, avatarEditPopup, avatarLinkInput, cardPlaceInput, cardUrlInput, activeImage, activeImageCaption, imagePopup, profileEditPopup, cardAddPopup} from "./components/utils.js";
 import {addCard, handleDeleteCard, renderLikeCount, renderLike} from "./components/card.js";
 import {openPopup, closePopup} from "./components/modal.js";
 import {getInitialCards, getUserInfo, uploadCard, deleteCardOnServer, setLikeOnServer, updateProfile, uploadNewAvatar} from "./components/api.js";
@@ -60,13 +60,7 @@ function openCardAddPopup() {
   openPopup(cardAddPopup);
 }
 
-function openImagePopup(evt) {
-  activeImage.src = evt.target.src;
-  activeImage.alt = evt.target.alt;
-  activeImageCaption.textContent = evt.target.alt;
-  openPopup(imagePopup);
-  imagePopup.style.background = "rgba(0, 0, 0, 0.9)";
-}
+
 
 //функция отображения карточек из массива
 function renderCards(cardArray, userId, handleDeleteIconClick, handleLikeIconClick) {
@@ -202,4 +196,3 @@ avatarEditButton.addEventListener('click', openAvatarEditPopup);
 
 enableValidation(config);
 
-export {openImagePopup};
