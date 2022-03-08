@@ -1,4 +1,4 @@
-import {openImagePopup} from "./../index.js";
+import {openImagePopup} from "./utils.js";
 
 
 const cardsContainer = document.querySelector('.elements');

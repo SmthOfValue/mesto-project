@@ -1,3 +1,5 @@
+import {openPopup} from "./modal.js";
+
 const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input-text',
@@ -33,4 +35,12 @@ const cardUrlInput = cardAddForm.querySelector('#card-url-input');
 const activeImage = imagePopup.querySelector('.popup__image');
 const activeImageCaption = imagePopup.querySelector('.popup__caption');
 
-export {config, profileEditPopup, cardAddPopup, imagePopup, avatarEditPopup, profileEditForm, nameInput, bioInput, cardAddForm, cardPlaceInput, cardUrlInput, popups, profileName, profileBio, profileAvatar, avatarEditForm, avatarLinkInput, activeImage, activeImageCaption};
+function openImagePopup(evt) {
+  activeImage.src = evt.target.src;
+  activeImage.alt = evt.target.alt;
+  activeImageCaption.textContent = evt.target.alt;
+  openPopup(imagePopup);
+  imagePopup.style.background = "rgba(0, 0, 0, 0.9)";
+}
+
+export {config, openImagePopup, profileEditPopup, cardAddPopup, imagePopup, avatarEditPopup, profileEditForm, nameInput, bioInput, cardAddForm, cardPlaceInput, cardUrlInput, popups, profileName, profileBio, profileAvatar, avatarEditForm, avatarLinkInput, activeImage, activeImageCaption};
